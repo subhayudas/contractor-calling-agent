@@ -1,1 +1,7 @@
 project_id = "gbskwbcuacprkwvooqer"
+
+[functions.submit-lead]
+verify_jwt = false
+
+[functions.trigger-call]
+verify_jwt = false
