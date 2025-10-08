@@ -57,12 +57,12 @@ export const LeadForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl border-none shadow-[var(--shadow-card)]">
+    <Card className="w-full max-w-2xl">
       <CardHeader className="text-center pb-8">
-        <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
           Get Started Today
         </CardTitle>
-        <CardDescription className="text-base mt-2">
+        <CardDescription className="text-base mt-3 text-foreground/60">
           Fill out the form below and our AI assistant will contact you
         </CardDescription>
       </CardHeader>
@@ -80,7 +80,6 @@ export const LeadForm = () => {
                 value={formData.firstName}
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 placeholder="John"
-                className="border-border focus:ring-primary"
               />
             </div>
             <div className="space-y-2">
@@ -94,7 +93,6 @@ export const LeadForm = () => {
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 placeholder="Doe"
-                className="border-border focus:ring-primary"
               />
             </div>
           </div>
@@ -111,7 +109,6 @@ export const LeadForm = () => {
               value={formData.phoneNumber}
               onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
               placeholder="+1 (555) 123-4567"
-              className="border-border focus:ring-primary"
             />
           </div>
 
@@ -127,7 +124,6 @@ export const LeadForm = () => {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="john@example.com"
-              className="border-border focus:ring-primary"
             />
           </div>
 
@@ -170,7 +166,7 @@ export const LeadForm = () => {
             </RadioGroup>
           </div>
 
-          <div className="flex items-start space-x-2 p-4 rounded-lg bg-secondary/30 border border-secondary">
+          <div className="flex items-start space-x-3 p-5 rounded-xl glass border border-primary/20">
             <Checkbox
               id="optInCall"
               checked={formData.optInCall}
@@ -183,10 +179,10 @@ export const LeadForm = () => {
                 htmlFor="optInCall"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
               >
-                Yes, I want to receive an AI voice call
+                Yes, I want to receive a voice call
               </Label>
-              <p className="text-sm text-muted-foreground">
-                Our personalized AI assistant will call you in 30 seconds to discuss your needs
+              <p className="text-sm text-foreground/60">
+                Our assistant will call you in 30 seconds to discuss your needs
               </p>
             </div>
           </div>
@@ -194,7 +190,8 @@ export const LeadForm = () => {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full h-12 text-base font-semibold bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-[var(--shadow-glow)]"
+            size="lg"
+            className="w-full text-base font-semibold"
           >
             {loading ? "Submitting..." : "Submit & Get Started"}
           </Button>

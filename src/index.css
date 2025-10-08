@@ -8,79 +8,76 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    /* Dark mode glassmorphism colors */
+    --background: 220 20% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 220 20% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 0 0% 95%;
 
     --primary: 197 71% 52%;
     --primary-foreground: 0 0% 100%;
     
     --primary-glow: 197 71% 65%;
     
-    --secondary: 197 37% 85%;
-    --secondary-foreground: 197 71% 25%;
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 0 0% 65%;
 
     --accent: 184 65% 59%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 63% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
+    --border: 220 20% 20%;
+    --input: 220 20% 18%;
     --ring: 197 71% 52%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
     
     --gradient-primary: linear-gradient(135deg, hsl(197 71% 52%), hsl(184 65% 59%));
-    --gradient-hero: linear-gradient(to bottom right, hsl(197 71% 52%), hsl(184 65% 59%), hsl(197 71% 45%));
-    --shadow-glow: 0 0 40px hsl(197 71% 52% / 0.3);
-    --shadow-card: 0 4px 20px hsl(222 47% 11% / 0.1);
+    --gradient-hero: linear-gradient(to bottom right, hsl(220 20% 10%), hsl(220 25% 15%));
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 220 20% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 222 47% 14%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 20% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222 47% 14%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 0 0% 95%;
 
     --primary: 197 71% 52%;
     --primary-foreground: 0 0% 100%;
     
     --primary-glow: 197 71% 65%;
 
-    --secondary: 217 33% 18%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 217 33% 18%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 0 0% 65%;
 
     --accent: 184 65% 59%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 63% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 18%;
-    --input: 217 33% 18%;
+    --border: 220 20% 20%;
+    --input: 220 20% 18%;
     --ring: 197 71% 52%;
     
     --gradient-primary: linear-gradient(135deg, hsl(197 71% 52%), hsl(184 65% 59%));
-    --gradient-hero: linear-gradient(to bottom right, hsl(197 71% 52%), hsl(184 65% 59%), hsl(197 71% 45%));
-    --shadow-glow: 0 0 40px hsl(197 71% 52% / 0.4);
-    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --gradient-hero: linear-gradient(to bottom right, hsl(220 20% 10%), hsl(220 25% 15%));
   }
 }
 
@@ -91,5 +88,33 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  html {
+    @apply dark;
+  }
+}
+
+/* Glassmorphism utility classes */
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .glass-input {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
