@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
 import { Home } from "lucide-react";
 
 const NotFound = () => {
@@ -12,6 +13,7 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center relative overflow-hidden">
+      <Navbar />
       {/* Background Video */}
       <video
         autoPlay

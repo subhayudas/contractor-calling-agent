@@ -63,7 +63,7 @@ export const LeadForm = () => {
           Get Started Today
         </CardTitle>
         <CardDescription className="text-base mt-3 text-foreground/60">
-          Fill out the form below and our AI assistant will contact you
+          Fill out the form below and our assistant will contact you
         </CardDescription>
       </CardHeader>
       <CardContent>
