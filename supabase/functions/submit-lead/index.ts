@@ -15,6 +15,7 @@ serve(async (req) => {
     const { firstName, lastName, phoneNumber, email, intent, language, optInCall } = await req.json();
 
     console.log('Received lead submission:', { firstName, lastName, phoneNumber, email, intent, language, optInCall });
+    console.log('🔍 Language value:', language, 'Type:', typeof language);
 
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;

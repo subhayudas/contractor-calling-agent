@@ -43,21 +43,26 @@ serve(async (req) => {
     }
 
     console.log('Found lead:', lead);
-    console.log('Lead language:', lead.language);
-    console.log('Language type:', typeof lead.language);
+    console.log('🔍 Lead language:', lead.language);
+    console.log('🔍 Language type:', typeof lead.language);
+    console.log('🔍 Language comparison:', lead.language, '===', 'french', ':', lead.language === 'french');
 
     // Select assistant and phone number based on language
     let vapiAssistantId: string;
     let vapiPhoneNumberId: string;
 
-    if (lead.language === 'french') {
+    // Normalize language string (trim and lowercase) for comparison
+    const normalizedLanguage = (lead.language || '').toString().trim().toLowerCase();
+    console.log('🔍 Normalized language:', normalizedLanguage);
+
+    if (normalizedLanguage === 'french') {
       vapiAssistantId = '46f8bf21-0eaa-4fab-bb1c-5bc89eff3b28';
       vapiPhoneNumberId = '2137f83a-dd61-4fea-8775-75326953a993';
-      console.log('✅ Using French agent - Assistant ID:', vapiAssistantId);
+      console.log('✅ Using French agent - Assistant ID:', vapiAssistantId, 'Phone:', vapiPhoneNumberId);
     } else {
       vapiAssistantId = englishAssistantId;
       vapiPhoneNumberId = englishPhoneNumberId;
-      console.log('✅ Using English agent - Assistant ID:', vapiAssistantId);
+      console.log('✅ Using English agent - Assistant ID:', vapiAssistantId, 'Phone:', vapiPhoneNumberId);
     }
 
     // Check if lead opted in for call
