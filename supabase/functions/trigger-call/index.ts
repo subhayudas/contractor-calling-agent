@@ -18,10 +18,10 @@ serve(async (req) => {
 
     // Get Vapi credentials
     const vapiApiKey = Deno.env.get('VAPI_API_KEY');
-    const vapiAssistantId = Deno.env.get('VAPI_ASSISTANT_ID');
-    const vapiPhoneNumberId = Deno.env.get('VAPI_PHONE_NUMBER_ID');
+    const englishAssistantId = Deno.env.get('VAPI_ASSISTANT_ID');
+    const englishPhoneNumberId = Deno.env.get('VAPI_PHONE_NUMBER_ID');
 
-    if (!vapiApiKey || !vapiAssistantId || !vapiPhoneNumberId) {
+    if (!vapiApiKey || !englishAssistantId || !englishPhoneNumberId) {
       throw new Error('Vapi credentials not configured');
     }
 
@@ -43,6 +43,22 @@ serve(async (req) => {
     }
 
     console.log('Found lead:', lead);
+    console.log('Lead language:', lead.language);
+    console.log('Language type:', typeof lead.language);
+
+    // Select assistant and phone number based on language
+    let vapiAssistantId: string;
+    let vapiPhoneNumberId: string;
+
+    if (lead.language === 'french') {
+      vapiAssistantId = '46f8bf21-0eaa-4fab-bb1c-5bc89eff3b28';
+      vapiPhoneNumberId = '2137f83a-dd61-4fea-8775-75326953a993';
+      console.log('✅ Using French agent - Assistant ID:', vapiAssistantId);
+    } else {
+      vapiAssistantId = englishAssistantId;
+      vapiPhoneNumberId = englishPhoneNumberId;
+      console.log('✅ Using English agent - Assistant ID:', vapiAssistantId);
+    }
 
     // Check if lead opted in for call
     if (!lead.opt_in_call) {
