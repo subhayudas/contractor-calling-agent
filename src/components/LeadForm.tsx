@@ -26,31 +26,58 @@ export const LeadForm = () => {
     setLoading(true);
 
     try {
+      console.log('Submitting lead form with data:', formData);
+      
       const { data, error } = await supabase.functions.invoke('submit-lead', {
         body: formData
       });
 
-      if (error) throw error;
+      console.log('Response from submit-lead:', { data, error });
 
-      toast.success(
-        formData.optInCall 
-          ? "Success! You'll receive a call in 30 seconds." 
-          : "Thank you! We'll be in touch soon."
-      );
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
 
-      // Reset form
-      setFormData({
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
-        email: "",
-        intent: "buy",
-        language: "english",
-        optInCall: false,
-      });
+      // Check if the response indicates success
+      if (data && data.success) {
+        console.log('Lead submitted successfully:', data.leadId);
+        
+        toast.success(
+          formData.optInCall 
+            ? "Success! You'll receive a call shortly from our assistant." 
+            : "Thank you! We've received your information and will be in touch soon.",
+          { duration: 5000 }
+        );
+
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          email: "",
+          intent: "buy",
+          language: "english",
+          optInCall: false,
+        });
+      } else {
+        throw new Error(data?.error || 'Unknown error occurred');
+      }
     } catch (error: any) {
       console.error('Error submitting form:', error);
-      toast.error("Failed to submit form. Please try again.");
+      
+      // Provide more specific error messages
+      let errorMessage = "Failed to submit form. Please try again.";
+      
+      if (error.message?.includes('fetch')) {
+        errorMessage = "Network error. Please check your internet connection and try again.";
+      } else if (error.message?.includes('not found') || error.message?.includes('404')) {
+        errorMessage = "Service not available. Please ensure the Supabase functions are deployed.";
+      } else if (error.message) {
+        errorMessage = `Error: ${error.message}`;
+      }
+      
+      toast.error(errorMessage, { duration: 7000 });
     } finally {
       setLoading(false);
     }

@@ -45,31 +45,33 @@ serve(async (req) => {
 
     console.log('Lead created successfully:', lead.id);
 
-    // If user opted in for call, schedule the call after 30 seconds
+    // If user opted in for call, trigger it immediately
+    // The 30-second delay will be handled by Vapi or can be scheduled via a queue
     if (optInCall && lead) {
-      console.log('Scheduling call for lead:', lead.id);
+      console.log('Triggering call for lead:', lead.id);
       
-      // Schedule the call by invoking the trigger-call function after 30 seconds
-      setTimeout(async () => {
-        try {
-          const response = await fetch(`${supabaseUrl}/functions/v1/trigger-call`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${supabaseKey}`,
-            },
-            body: JSON.stringify({ leadId: lead.id }),
-          });
+      try {
+        const response = await fetch(`${supabaseUrl}/functions/v1/trigger-call`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${supabaseKey}`,
+          },
+          body: JSON.stringify({ leadId: lead.id }),
+        });
 
-          if (!response.ok) {
-            console.error('Failed to trigger call:', await response.text());
-          } else {
-            console.log('Call triggered successfully for lead:', lead.id);
-          }
-        } catch (error) {
-          console.error('Error triggering call:', error);
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Failed to trigger call:', errorText);
+          // Don't throw error here - lead was saved successfully
+        } else {
+          const callData = await response.json();
+          console.log('Call triggered successfully for lead:', lead.id, callData);
         }
-      }, 30000); // 30 seconds delay
+      } catch (error) {
+        console.error('Error triggering call:', error);
+        // Don't throw error here - lead was saved successfully
+      }
     }
 
     return new Response(

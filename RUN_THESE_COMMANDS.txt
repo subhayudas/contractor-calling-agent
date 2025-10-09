@@ -1,0 +1,56 @@
+═══════════════════════════════════════════════════════════════
+  🚀 COPY AND RUN THESE COMMANDS IN YOUR TERMINAL
+═══════════════════════════════════════════════════════════════
+
+Step 1: Open Terminal and navigate to your project
+---------------------------------------------------
+cd /Users/subhayudas/Desktop/vapi-supa-call-flow
+
+
+Step 2: Login to Supabase (one-time, opens browser)
+----------------------------------------------------
+supabase login
+
+
+Step 3: Deploy everything (database + functions)
+-------------------------------------------------
+./deploy.sh
+
+
+Step 4: Set up Vapi credentials
+--------------------------------
+./setup-secrets.sh
+
+When prompted, enter:
+  - VAPI_API_KEY: Get from https://dashboard.vapi.ai/ → Settings → API Keys
+  - VAPI_ASSISTANT_ID: Your English assistant ID
+  - VAPI_PHONE_NUMBER_ID: Your English phone number ID
+
+
+Step 5: Test that it's working
+-------------------------------
+npm run dev
+
+Then open http://localhost:5173 in your browser
+
+
+═══════════════════════════════════════════════════════════════
+  ✅ VERIFY DATA IS BEING STORED
+═══════════════════════════════════════════════════════════════
+
+After submitting a form, run this to see the data:
+---------------------------------------------------
+supabase db query "SELECT * FROM public.leads ORDER BY created_at DESC LIMIT 5;"
+
+
+═══════════════════════════════════════════════════════════════
+  🎯 THAT'S IT!
+═══════════════════════════════════════════════════════════════
+
+Your app will now:
+✅ Save all form submissions to Supabase database
+✅ Trigger automatic calls to users who opt-in
+✅ Route to correct language assistant (English/French)
+
+Need help? Check START_HERE.md
+
