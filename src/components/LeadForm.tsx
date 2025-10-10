@@ -26,10 +26,20 @@ export const LeadForm = () => {
     setLoading(true);
 
     try {
-      console.log('Submitting lead form with data:', formData);
+      // Normalize phone number - ensure it starts with +
+      const normalizedPhoneNumber = formData.phoneNumber.trim().startsWith('+') 
+        ? formData.phoneNumber.trim()
+        : '+' + formData.phoneNumber.trim();
+
+      const submissionData = {
+        ...formData,
+        phoneNumber: normalizedPhoneNumber
+      };
+
+      console.log('Submitting lead form with data:', submissionData);
       
       const { data, error } = await supabase.functions.invoke('submit-lead', {
-        body: formData
+        body: submissionData
       });
 
       console.log('Response from submit-lead:', { data, error });
@@ -135,7 +145,7 @@ export const LeadForm = () => {
               required
               value={formData.phoneNumber}
               onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-              placeholder="+1 (555) 123-4567"
+              placeholder="1 (555) 123-4567"
             />
           </div>
 
