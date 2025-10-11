@@ -1,6 +1,6 @@
 import { LeadForm } from "@/components/LeadForm";
 import Navbar from "@/components/Navbar";
-import { Sparkles } from "lucide-react";
+import { Zap, CheckCircle, Clock, Shield } from "lucide-react";
 
 const Index = () => {
   return (
@@ -29,10 +29,18 @@ const Index = () => {
         <div className="text-center mb-16 space-y-6">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass border border-primary/30 mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Choose us as your real estate agent</span>
+            <Zap className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Licensed & Insured Electrical Services</span>
           </div>
           
+          {/* Main Heading */}
+          <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+            Expert Electrical
+            <br />
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Contractor Services
+            </span>
+          </h1>
           
           
         </div>

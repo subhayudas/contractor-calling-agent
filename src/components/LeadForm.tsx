@@ -5,9 +5,11 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Phone, Mail, User, Languages } from "lucide-react";
+import { Phone, Mail, User, Zap, Home, Clock, MapPin } from "lucide-react";
 
 export const LeadForm = () => {
   const [loading, setLoading] = useState(false);
@@ -16,8 +18,11 @@ export const LeadForm = () => {
     lastName: "",
     phoneNumber: "",
     email: "",
-    intent: "buy",
-    language: "english",
+    serviceType: "electrical_repair",
+    urgency: "routine",
+    propertyType: "residential",
+    address: "",
+    projectDescription: "",
     optInCall: false,
   });
 
@@ -55,8 +60,8 @@ export const LeadForm = () => {
         
         toast.success(
           formData.optInCall 
-            ? "Success! You'll receive a call shortly from our assistant." 
-            : "Thank you! We've received your information and will be in touch soon.",
+            ? "Success! Our electrician will call you shortly." 
+            : "Thank you! We've received your request and will be in touch soon.",
           { duration: 5000 }
         );
 
@@ -66,8 +71,11 @@ export const LeadForm = () => {
           lastName: "",
           phoneNumber: "",
           email: "",
-          intent: "buy",
-          language: "english",
+          serviceType: "electrical_repair",
+          urgency: "routine",
+          propertyType: "residential",
+          address: "",
+          projectDescription: "",
           optInCall: false,
         });
       } else {
@@ -97,10 +105,10 @@ export const LeadForm = () => {
     <Card className="w-full max-w-2xl">
       <CardHeader className="text-center pb-8">
         <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-          Get Started Today
+          Request Service Today
         </CardTitle>
         <CardDescription className="text-base mt-3 text-foreground/60">
-          Fill out the form below and our assistant will contact you
+          Tell us about your electrical needs and we'll get back to you right away
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -164,43 +172,110 @@ export const LeadForm = () => {
             />
           </div>
 
-          <div className="space-y-3">
-            <Label>I want to:</Label>
-            <RadioGroup
-              value={formData.intent}
-              onValueChange={(value) => setFormData({ ...formData, intent: value })}
-              className="flex gap-4"
+          <div className="space-y-2">
+            <Label htmlFor="serviceType" className="flex items-center gap-2">
+              <Zap className="h-4 w-4 text-primary" />
+              Service Type
+            </Label>
+            <Select
+              value={formData.serviceType}
+              onValueChange={(value) => setFormData({ ...formData, serviceType: value })}
             >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="buy" id="buy" />
-                <Label htmlFor="buy" className="cursor-pointer font-normal">Buy</Label>
+              <SelectTrigger id="serviceType">
+                <SelectValue placeholder="Select a service" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="residential_wiring">Residential Wiring</SelectItem>
+                <SelectItem value="commercial_wiring">Commercial Wiring</SelectItem>
+                <SelectItem value="panel_upgrade">Panel Upgrade</SelectItem>
+                <SelectItem value="lighting_installation">Lighting Installation</SelectItem>
+                <SelectItem value="electrical_repair">Electrical Repair</SelectItem>
+                <SelectItem value="emergency_service">Emergency Service</SelectItem>
+                <SelectItem value="ev_charger_installation">EV Charger Installation</SelectItem>
+                <SelectItem value="generator_installation">Generator Installation</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="urgency" className="flex items-center gap-2">
+              <Clock className="h-4 w-4 text-primary" />
+              How Soon Do You Need Service?
+            </Label>
+            <RadioGroup
+              value={formData.urgency}
+              onValueChange={(value) => setFormData({ ...formData, urgency: value })}
+              className="grid grid-cols-2 gap-3"
+            >
+              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:border-primary transition-colors">
+                <RadioGroupItem value="routine" id="routine" />
+                <Label htmlFor="routine" className="cursor-pointer font-normal">Routine</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="sell" id="sell" />
-                <Label htmlFor="sell" className="cursor-pointer font-normal">Sell</Label>
+              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:border-primary transition-colors">
+                <RadioGroupItem value="soon" id="soon" />
+                <Label htmlFor="soon" className="cursor-pointer font-normal">Within a Week</Label>
+              </div>
+              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:border-primary transition-colors">
+                <RadioGroupItem value="urgent" id="urgent" />
+                <Label htmlFor="urgent" className="cursor-pointer font-normal">Urgent (1-2 Days)</Label>
+              </div>
+              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border hover:border-primary transition-colors">
+                <RadioGroupItem value="emergency" id="emergency" />
+                <Label htmlFor="emergency" className="cursor-pointer font-normal">Emergency (Now)</Label>
               </div>
             </RadioGroup>
           </div>
 
-          <div className="space-y-3">
-            <Label className="flex items-center gap-2">
-              <Languages className="h-4 w-4 text-primary" />
-              Preferred Language
+          <div className="space-y-2">
+            <Label htmlFor="propertyType" className="flex items-center gap-2">
+              <Home className="h-4 w-4 text-primary" />
+              Property Type
             </Label>
             <RadioGroup
-              value={formData.language}
-              onValueChange={(value) => setFormData({ ...formData, language: value })}
+              value={formData.propertyType}
+              onValueChange={(value) => setFormData({ ...formData, propertyType: value })}
               className="flex gap-4"
             >
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="english" id="english" />
-                <Label htmlFor="english" className="cursor-pointer font-normal">English</Label>
+                <RadioGroupItem value="residential" id="residential" />
+                <Label htmlFor="residential" className="cursor-pointer font-normal">Residential</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="french" id="french" />
-                <Label htmlFor="french" className="cursor-pointer font-normal">French</Label>
+                <RadioGroupItem value="commercial" id="commercial" />
+                <Label htmlFor="commercial" className="cursor-pointer font-normal">Commercial</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="industrial" id="industrial" />
+                <Label htmlFor="industrial" className="cursor-pointer font-normal">Industrial</Label>
               </div>
             </RadioGroup>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="address" className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-primary" />
+              Service Address (Optional)
+            </Label>
+            <Input
+              id="address"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+              placeholder="123 Main St, City, State"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="projectDescription">
+              Project Description (Optional)
+            </Label>
+            <Textarea
+              id="projectDescription"
+              value={formData.projectDescription}
+              onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
+              placeholder="Tell us about your electrical needs..."
+              rows={4}
+            />
           </div>
 
           <div className="flex items-start space-x-3 p-5 rounded-xl glass border border-primary/20">
@@ -216,10 +291,10 @@ export const LeadForm = () => {
                 htmlFor="optInCall"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
               >
-                Yes, I want to receive a voice call
+                Yes, I want to receive a call from an electrician
               </Label>
               <p className="text-sm text-foreground/60">
-                Our assistant will call you in 30 seconds to discuss your needs
+                Our AI assistant will call you shortly to discuss your electrical needs
               </p>
             </div>
           </div>
@@ -230,7 +305,7 @@ export const LeadForm = () => {
             size="lg"
             className="w-full text-base font-semibold"
           >
-            {loading ? "Submitting..." : "Submit & Get Started"}
+            {loading ? "Submitting..." : "Request Service Now"}
           </Button>
         </form>
       </CardContent>

@@ -92,7 +92,7 @@ const Navbar = () => {
               className="text-white hover:text-primary transition-all duration-300 transform hover:scale-105 focus:outline-none"
             >
               <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                Noryon Agent
+                ⚡ Elite Electric
               </span>
             </button>
           </div>

@@ -1,10 +1,12 @@
-# Vapi-Supabase Call Flow Application
+# ⚡ Elite Electric - AI-Powered Electrical Contractor Website
 
-> **🚀 NEW USER? START HERE:** [START_HERE.md](./START_HERE.md) - 3 commands to get running!
+> **🚀 NEW USER? START HERE:** [ELECTRICAL_CONTRACTOR_SETUP.md](./ELECTRICAL_CONTRACTOR_SETUP.md) - Complete setup guide!
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/805ef9ba-dd0c-4f2b-96d4-bff03d137a65
+A professional electrical contractor website with AI-powered lead capture and automated customer calling using VAPI and Supabase.
+
+**Supabase Project**: https://supabase.com/dashboard/project/phafibsvqaoomeamnufk
 
 ## How can I edit this code?
 
@@ -74,45 +76,72 @@ To connect a domain, navigate to Project > Settings > Domains and click Connect 
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
 
-## VAPI Configuration
+## ⚡ Electrical Contractor Features
 
-### Assistant Prompt
+### Service Types
+- Residential Wiring
+- Commercial Wiring
+- Panel Upgrade
+- Lighting Installation
+- Electrical Repair
+- Emergency Service (24/7)
+- EV Charger Installation
+- Generator Installation
 
-The AI assistant prompt for Shaun is located in `/prompts/shaun-assistant-prompt.md`.
+### VAPI Configuration
 
-When configuring your VAPI assistant, use this prompt and ensure the following variables are available:
-- `{{firstName}}` - Lead's first name
-- `{{lastName}}` - Lead's last name
-- `{{email}}` - Lead's email address
-- `{{intent}}` - User's intent: "buy" or "sell"
-- `{{language}}` - User's preferred language: "english" or "french"
+The AI assistant is configured with the following variables:
+- `{{firstName}}` - Customer's first name
+- `{{lastName}}` - Customer's last name
+- `{{email}}` - Customer's email address
+- `{{serviceType}}` - Type of electrical service needed
+- `{{urgency}}` - Urgency level (routine, soon, urgent, emergency)
+- `{{propertyType}}` - Property type (residential, commercial, industrial)
+- `{{address}}` - Service location
+- `{{projectDescription}}` - Detailed project description
+
+**VAPI Agent ID**: `123a00af-f502-4254-a15c-6718542bec65`  
+**Phone Number ID**: `65c2cf1e-dafd-4f9f-aee0-a544d8d0421d`
 
 These variables are automatically passed from the `trigger-call` Supabase Edge Function to VAPI.
 
 ## Quick Start - Deployment
 
-**IMPORTANT: Data will NOT be saved until you deploy the Supabase Edge Functions!**
+**IMPORTANT: Data will NOT be saved until you set up the database and deploy the Supabase Edge Functions!**
 
-### Step 1: Deploy to Supabase
+### Step 1: Set up the Database
 
+**Easy Method**: Go to Supabase SQL Editor and run the SQL from:
+```
+APPLY_THIS_TO_SUPABASE.sql
+```
+
+Or use Supabase CLI:
 ```bash
-# Run the deployment script
-./deploy.sh
+supabase db push
 ```
 
 ### Step 2: Set up environment variables
 
-```bash
-# Run the secrets setup script
-./setup-secrets.sh
+Create a `.env` file (already done) with:
+```env
+VITE_SUPABASE_URL=https://phafibsvqaoomeamnufk.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+VAPI_AGENT_ID=123a00af-f502-4254-a15c-6718542bec65
+VAPI_PHONE_NUMBER_ID=65c2cf1e-dafd-4f9f-aee0-a544d8d0421d
 ```
 
-Or manually set secrets:
+### Step 3: Deploy Edge Functions
 
 ```bash
+# Deploy both functions
+supabase functions deploy submit-lead
+supabase functions deploy trigger-call
+```
+
+Set Supabase secrets:
+```bash
 supabase secrets set VAPI_API_KEY="your-vapi-api-key"
-supabase secrets set VAPI_ASSISTANT_ID="your-english-assistant-id"
-supabase secrets set VAPI_PHONE_NUMBER_ID="your-english-phone-number-id"
 ```
 
 ### Step 3: Verify deployment
@@ -139,11 +168,11 @@ supabase functions logs submit-lead
 
 ## How It Works
 
-1. **User submits form** → Data sent to `submit-lead` Edge Function
-2. **Lead saved to database** → Inserted into `public.leads` table
+1. **Customer submits form** → Service request sent to `submit-lead` Edge Function
+2. **Lead saved to database** → Inserted into `public.leads` table with service details
 3. **If opted in** → `trigger-call` function invoked automatically
-4. **Vapi call triggered** → Assistant calls user with personalized data
-5. **Language routing** → English or French assistant based on preference
+4. **VAPI call triggered** → AI assistant calls customer with personalized data
+5. **Conversation** → AI discusses electrical needs, urgency, and schedules service
 
 ## Troubleshooting
 

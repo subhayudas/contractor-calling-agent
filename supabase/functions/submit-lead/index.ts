@@ -13,10 +13,30 @@ serve(async (req) => {
   }
 
   try {
-    const { firstName, lastName, phoneNumber, email, intent, language, optInCall } = await req.json();
+    const { 
+      firstName, 
+      lastName, 
+      phoneNumber, 
+      email, 
+      serviceType, 
+      urgency,
+      propertyType,
+      address,
+      projectDescription,
+      preferredContactTime,
+      optInCall 
+    } = await req.json();
 
-    console.log('Received lead submission:', { firstName, lastName, phoneNumber, email, intent, language, optInCall });
-    console.log('🔍 Language value:', language, 'Type:', typeof language);
+    console.log('Received electrical contractor lead submission:', { 
+      firstName, 
+      lastName, 
+      phoneNumber, 
+      email, 
+      serviceType, 
+      urgency,
+      propertyType,
+      optInCall 
+    });
 
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
@@ -31,8 +51,12 @@ serve(async (req) => {
         last_name: lastName,
         phone_number: phoneNumber,
         email: email,
-        intent: intent,
-        language: language,
+        service_type: serviceType,
+        urgency: urgency,
+        property_type: propertyType || null,
+        address: address || null,
+        project_description: projectDescription || null,
+        preferred_contact_time: preferredContactTime || null,
         opt_in_call: optInCall,
       })
       .select()
