@@ -91,7 +91,7 @@ const Navbar = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="text-white hover:text-primary transition-all duration-300 transform hover:scale-105 focus:outline-none"
             >
-              <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              <span className="text-2xl md:text-3xl font-light tracking-wide bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                 ⚡ Elite Electric
               </span>
             </button>
@@ -124,7 +124,7 @@ const Navbar = () => {
                 onClick={toggleDropdown}
                 className="flex items-center space-x-2 text-white hover:text-primary transition-colors duration-300 px-4 py-2 rounded-lg hover:bg-white/10 group"
               >
-                <span className="font-medium">Navigate</span>
+                <span className="font-light tracking-wide">Navigate</span>
                 <ChevronDown 
                   className={`h-4 w-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
                 />
@@ -146,7 +146,7 @@ const Navbar = () => {
                           className="w-full text-left px-4 py-2.5 text-white hover:text-primary hover:bg-white/10 transition-all duration-200 flex items-center group"
                         >
                           <Icon className="h-4 w-4 mr-3 group-hover:scale-110 transition-transform" />
-                          <span className="font-medium">{item.name}</span>
+                          <span className="font-light tracking-wide">{item.name}</span>
                           <ChevronDown className="h-3 w-3 ml-auto opacity-0 group-hover:opacity-100 transition-opacity rotate-[-90deg]" />
                         </button>
                       );
@@ -227,12 +227,12 @@ const Navbar = () => {
             {/* CTA Button */}
             <a
               href="tel:+1234567890"
-              className="relative inline-flex h-11 overflow-hidden items-center justify-center rounded-xl px-6 font-medium group"
+              className="relative inline-flex h-11 overflow-hidden items-center justify-center rounded-xl px-6 font-light group"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-primary via-accent to-primary opacity-100 group-hover:opacity-90 transition-opacity"></span>
               <span className="absolute top-0 left-0 w-full bg-gradient-to-b from-white to-transparent opacity-10 h-1/3"></span>
               <span className="absolute inset-0 w-full h-full border border-white/10 rounded-xl"></span>
-              <span className="relative text-white z-10 flex items-center text-sm font-semibold group-hover:scale-105 transition-transform">
+              <span className="relative text-white z-10 flex items-center text-sm font-light tracking-wide group-hover:scale-105 transition-transform">
                 Call Us
                 <Phone className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </span>
@@ -247,7 +247,7 @@ const Navbar = () => {
           <div className="flex flex-col space-y-5">
             {/* Navigation Links for Mobile */}
             <div className="space-y-1">
-              <h3 className="text-white font-semibold text-sm uppercase tracking-wider px-3 py-2 text-center">
+              <h3 className="text-white font-light text-sm uppercase tracking-wider px-3 py-2 text-center">
                 Navigate
               </h3>
               <div className="grid grid-cols-2 gap-2">
@@ -257,7 +257,7 @@ const Navbar = () => {
                     <button
                       key={item.name}
                       onClick={() => handleSmoothScroll(item.href)}
-                      className="text-white hover:text-primary px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 hover:bg-white/10 text-left flex items-center"
+                      className="text-white hover:text-primary px-3 py-2 rounded-lg text-sm font-light transition-colors duration-200 hover:bg-white/10 text-left flex items-center"
                     >
                       <Icon className="h-4 w-4 mr-2" />
                       {item.name}
@@ -316,7 +316,7 @@ const Navbar = () => {
               <a
                 href="tel:+1234567890"
                 onClick={handleLinkClick}
-                className="block w-full bg-gradient-to-r from-primary via-accent to-primary text-white font-semibold py-3 px-4 rounded-xl text-center hover:opacity-90 transition-all duration-300 shadow-lg"
+                className="block w-full bg-gradient-to-r from-primary via-accent to-primary text-white font-light tracking-wide py-3 px-4 rounded-xl text-center hover:opacity-90 transition-all duration-300 shadow-lg"
               >
                 Call Us
               </a>
