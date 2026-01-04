@@ -104,7 +104,7 @@ export const LeadForm = () => {
   return (
     <Card className="w-full max-w-2xl transform transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl hover:shadow-primary/10 bg-white/95 backdrop-blur-xl border-primary/20">
       <CardHeader className="text-center pb-8">
-        <CardTitle className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-in fade-in slide-in-from-top-4 duration-700">
+        <CardTitle className="text-3xl md:text-4xl font-bold tracking-tight text-primary animate-in fade-in slide-in-from-top-4 duration-700">
           Request Healthcare Support
         </CardTitle>
         <CardDescription className="text-base mt-3 font-normal text-foreground/70 animate-in fade-in slide-in-from-top-4 duration-700 delay-150">
@@ -325,7 +325,6 @@ export const LeadForm = () => {
                 </>
               )}
             </span>
-            <span className="absolute inset-0 -z-10 bg-gradient-to-r from-accent to-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
           </Button>
         </form>
       </CardContent>

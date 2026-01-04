@@ -5,26 +5,15 @@ import { GradientBars } from "@/components/GradientBars";
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-blue-50 via-teal-50/30 to-cyan-50">
+    <div className="min-h-screen relative overflow-hidden bg-white">
       <Navbar />
-      {/* Animated Gradient Bars Background - Healthcare colors */}
+      {/* Animated Gradient Bars Background - Orange colors */}
       <GradientBars
         numBars={12}
-        gradientFrom="rgba(23, 127, 173, 0.12)"
+        gradientFrom="rgba(255, 140, 0, 0.12)"
         gradientTo="transparent"
         animationDuration={3}
       />
-      
-      {/* Subtle medical cross pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none z-[1]" 
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 0h10v25h25v10H35v25H25V35H0V25h25V0z' fill='%23177fad' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-          backgroundSize: '60px 60px'
-        }}
-      ></div>
-      
-      {/* Soft gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-primary/5 pointer-events-none z-[1]"></div>
         
       <div className="container mx-auto px-4 pt-28 md:pt-32 pb-16 md:pb-24 relative z-10">
         <div className="text-center mb-12 space-y-6 max-w-4xl mx-auto">
@@ -35,7 +24,7 @@ const Index = () => {
           </div>
           
           {/* Hero Headline */}
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-in fade-in slide-in-from-top-4 duration-700 delay-100">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-primary animate-in fade-in slide-in-from-top-4 duration-700 delay-100">
             Your Health, Our Priority
           </h1>
           

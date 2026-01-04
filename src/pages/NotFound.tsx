@@ -30,12 +30,9 @@ const NotFound = () => {
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>
       
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none"></div>
-      
       <div className="text-center space-y-6 px-4 relative z-10">
         <div className="glass-card p-12 rounded-3xl max-w-md mx-auto">
-          <h1 className="mb-4 text-7xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+          <h1 className="mb-4 text-7xl font-bold text-primary">
             404
           </h1>
           <p className="mb-8 text-xl text-foreground/70">

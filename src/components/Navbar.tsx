@@ -89,21 +89,15 @@ const Navbar = () => {
           <div className="flex items-center">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-primary hover:text-accent transition-all duration-300 transform hover:scale-105 focus:outline-none"
+              className="text-primary hover:text-primary/80 transition-all duration-300 transform hover:scale-105 focus:outline-none"
             >
-              <span className="text-2xl md:text-3xl font-semibold tracking-tight bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent flex items-center gap-2">
+              <span className="text-2xl md:text-3xl font-semibold tracking-tight text-primary flex items-center gap-2">
                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="url(#grad1)"/>
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="currentColor"/>
                   <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <defs>
-                    <linearGradient id="grad1" x1="2" y1="2" x2="22" y2="12">
-                      <stop offset="0%" stopColor="rgb(23, 127, 173)" />
-                      <stop offset="100%" stopColor="rgb(17, 153, 142)" />
-                    </linearGradient>
-                  </defs>
                 </svg>
-                HealthAI
+                VitalSenseAI
               </span>
             </button>
           </div>
@@ -240,9 +234,7 @@ const Navbar = () => {
               href="tel:+1234567890"
               className="relative inline-flex h-11 overflow-hidden items-center justify-center rounded-xl px-6 font-medium group"
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-primary via-accent to-primary opacity-100 group-hover:opacity-90 transition-opacity shadow-lg shadow-primary/30"></span>
-              <span className="absolute top-0 left-0 w-full bg-gradient-to-b from-white to-transparent opacity-20 h-1/3"></span>
-              <span className="absolute inset-0 w-full h-full border border-white/20 rounded-xl"></span>
+              <span className="absolute inset-0 w-full h-full bg-primary opacity-100 group-hover:opacity-90 transition-opacity shadow-lg shadow-primary/30"></span>
               <span className="relative text-white z-10 flex items-center text-sm font-medium tracking-wide group-hover:scale-105 transition-transform">
                 Get Support
                 <Phone className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -327,7 +319,7 @@ const Navbar = () => {
               <a
                 href="tel:+1234567890"
                 onClick={handleLinkClick}
-                className="block w-full bg-gradient-to-r from-primary via-accent to-primary text-white font-medium tracking-wide py-3 px-4 rounded-xl text-center hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/30"
+                className="block w-full bg-primary text-white font-medium tracking-wide py-3 px-4 rounded-xl text-center hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/30"
               >
                 Get Support
               </a>
